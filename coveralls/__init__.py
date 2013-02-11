@@ -37,15 +37,15 @@ __doc__ = """
 :copyright: %s
 """ % (__version__, __author__, __license__)
 
-import os
-import yaml
-import argparse
 from coveralls.control import coveralls
 from coveralls.repository import gitrepo
 from coveralls.api import post
 
 
 def parse_args():
+    import os
+    import yaml
+    import argparse
     parser = argparse.ArgumentParser(prog='coveralls')
     parser.add_argument('--coveralls_url', '-u', help='coveralls.io api url', default='https://coveralls.io/api/v1/jobs')
     parser.add_argument('--base_dir', '-b', help='project root directory', default='.')
