@@ -37,10 +37,6 @@ __doc__ = """
 :copyright: %s
 """ % (__version__, __author__, __license__)
 
-from coveralls.control import coveralls
-from coveralls.repository import gitrepo
-from coveralls.api import post
-
 
 def parse_args():
     import os
@@ -66,6 +62,9 @@ def parse_args():
 
 
 def wear(args=None):
+    from coveralls.control import coveralls
+    from coveralls.repository import gitrepo
+    from coveralls.api import post
     args = args or parse_args()
     coverage = coveralls(data_file=args.data_file, config_file=args.config_file)
     coverage.load()
