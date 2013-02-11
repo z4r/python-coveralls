@@ -1,6 +1,6 @@
 from unittest import TestCase
 from httpretty import HTTPretty, httprettified
-from coveralls import coveralls, gitrepo, post, wear
+from coveralls import api, repository, control, wear
 import os
 
 
@@ -58,11 +58,11 @@ class CoverallsTestCase(TestCase):
         self.assertEqual(response.json(), {u'url': u'https://coveralls.io/jobs/5722', u'message': u'Job #5.1 - 100.0% Covered'})
 
     def test_gitrepo(self):
-        git = gitrepo(Arguments.base_dir)
+        git = repository.gitrepo(Arguments.base_dir)
         self.assertEqual(git, GIT_EXP)
 
     def test_coveralls(self):
-        coverage = coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
+        coverage = control.coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
         coverage.load()
         self.assertEqual(coverage.coveralls(Arguments.base_dir), SOURCE_FILES)
 
@@ -73,7 +73,7 @@ class CoverallsTestCase(TestCase):
             'https://coveralls.io/api/v1/jobs',
             body='{"message":"Job #5.1 - 100.0% Covered","url":"https://coveralls.io/jobs/5722"}'
         )
-        response = post(
+        response = api.post(
             url=Arguments.coveralls_url,
             repo_token=Arguments.repo_token,
             service_job_id=Arguments.service_job_id,
