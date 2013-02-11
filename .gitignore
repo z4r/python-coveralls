@@ -1,4 +1,5 @@
 *.py[cod]
+venv
 
 # C extensions
 *.so
@@ -25,6 +26,7 @@ pip-log.txt
 .coverage
 .tox
 nosetests.xml
+.cache
 
 # Translations
 *.mo
@@ -33,3 +35,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+.idea
+
+# Sample
+python-coveralls-example

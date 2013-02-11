@@ -1,0 +1,5 @@
+argparse
+PyYAML
+GitPython
+requests
+coverage
