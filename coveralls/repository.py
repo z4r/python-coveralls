@@ -12,6 +12,6 @@ def gitrepo(root):
             "committer_email": repo.head.commit.committer.email,
             "message": repo.head.commit.message.strip()
         },
-        "branch": repo.head.reference.name,
+        "branch": repo.head.commit.name_rev.split()[1],
         "remotes": [{'name': remote.name, 'url': remote.url} for remote in repo.remotes]
     }
