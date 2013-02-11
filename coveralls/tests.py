@@ -25,7 +25,7 @@ GIT_EXP = {
     },
     'remotes': [
         {
-            'url': 'git@github.com:z4r/python-coveralls-example.git',
+            'url': 'https://github.com/z4r/python-coveralls-example.git',
             'name': 'origin'
         }
     ],
