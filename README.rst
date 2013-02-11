@@ -4,6 +4,7 @@ Python interface to coveralls.io API
 
 .. image:: https://api.travis-ci.org/z4r/python-coveralls.png?branch=master
     :target: http://travis-ci.org/z4r/python-coveralls
+
 .. image:: https://coveralls.io/repos/z4r/python-coveralls/badge.png?branch=master
     :target: https://coveralls.io/r/z4r/python-coveralls
 
