@@ -59,6 +59,7 @@ def parse_args():
             yml = yaml.load(fp)
     except:
         pass
+    yml = yml or {}
     args.repo_token = yml.get('repo_token', '')
     args.service_name = yml.get('service_name', 'travis-ci')
     args.service_job_id = os.environ.get('TRAVIS_JOB_ID', '')
