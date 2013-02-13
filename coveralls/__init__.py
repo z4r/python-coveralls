@@ -81,4 +81,5 @@ def wear(args=None):
         git=gitrepo(args.base_dir),
         source_files=coverage.coveralls(args.base_dir),
     )
+    print response.text
     return response
