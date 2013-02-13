@@ -53,9 +53,12 @@ def parse_args():
     args.data_file = os.path.join(args.base_dir, args.data_file)
     args.config_file = os.path.join(args.base_dir, args.config_file)
     args.coveralls_yaml = os.path.join(args.base_dir, args.coveralls_yaml)
-    with open(args.coveralls_yaml, 'r') as fp:
-        yml = yaml.load(fp)
-    args.repo_token = yml['repo_token']
+    try:
+        with open(args.coveralls_yaml, 'r') as fp:
+            yml = yaml.load(fp)
+    except:
+        yml = {}
+    args.repo_token = yml.get('repo_token', '')
     args.service_name = yml.get('service_name', 'travis-ci')
     args.service_job_id = os.environ.get('TRAVIS_JOB_ID', '')
     return args

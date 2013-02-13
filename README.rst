@@ -4,7 +4,6 @@ Python interface to coveralls.io API
 
 .. image:: https://api.travis-ci.org/z4r/python-coveralls.png?branch=master
     :target: http://travis-ci.org/z4r/python-coveralls
-
 .. image:: https://coveralls.io/repos/z4r/python-coveralls/badge.png?branch=master
     :target: https://coveralls.io/r/z4r/python-coveralls
 
@@ -21,7 +20,7 @@ or simply adding it to your requirements
 
 CONFIGURATION
 =============
-Coveralls for Python uses a .coveralls.yml file at the root level of your repository to configure options.
+If you're not using Travis, Coveralls for Python uses a .coveralls.yml file at the root level of your repository to configure options.
 The only required option is repo_token (found on your repository's page on Coveralls) to specify which project on Coveralls your project maps to.
 Another important option is is service_name which allows you to specify where Coveralls should look to find additional information about your builds. This can be any string, but using travis-ci or travis-pro will allow Coveralls to fetch branch data, comment on pull requests, and more.
 A .coveralls.yml file configured for Travis Pro::
