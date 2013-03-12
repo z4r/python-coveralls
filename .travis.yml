@@ -8,7 +8,7 @@ before_script:
   - pip install -r test_requirements.txt --use-mirrors
   - git clone https://github.com/z4r/python-coveralls-example.git
   - cd python-coveralls-example
-  - git checkout -qf 17b8119796516195527dcb4f454a2ebd41d60244
+  - git checkout -qf 6050a96a400cecba053e457e1e5187d3af0ede1e
   - py.test example/tests.py --cov=example
   - cd -
 script:
