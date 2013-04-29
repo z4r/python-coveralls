@@ -30,12 +30,12 @@ A .coveralls.yml file configured for Travis Pro::
 
 TRAVIS.YML
 ==========
-You've to product a .coverage file and you can use coverage, py-cov or nose.
+Create a .coverage file and you can use coverage, py-cov or nose.
 The you can add in the _after_success_ step::
 
     coveralls
 
-It should like something like::
+It should look like something like::
 
     language: python
     python:
