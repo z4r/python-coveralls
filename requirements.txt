@@ -1,6 +1,5 @@
 argparse
 PyYAML
-GitPython
 requests
 coverage
 six
