@@ -5,7 +5,9 @@ __classifiers__ = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: Apache Software License',
     'Operating System :: OS Independent',
-    'Programming Language :: Python',
+    'Programming Language :: Python :: 2.6',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3.3',
     'Topic :: Internet :: WWW/HTTP',
     'Topic :: Software Development :: Libraries',
 ]
@@ -81,5 +83,5 @@ def wear(args=None):
         git=gitrepo(args.base_dir),
         source_files=coverage.coveralls(args.base_dir),
     )
-    print response.text
+    print(response.text)
     return response

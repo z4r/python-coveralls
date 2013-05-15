@@ -1,17 +1,24 @@
-from git import Repo
+import os
+import sh
+FORMAT = '%n'.join(['%H', '%aN', '%ae', '%cN', '%ce', '%s'])
 
 
 def gitrepo(root):
-    repo = Repo(root)
+    tmpdir = sh.pwd().strip()
+    sh.cd(root)
+    gitlog = sh.git('--no-pager', 'log', '-1', pretty="format:%s" % FORMAT).split('\n', 5)
+    branch = os.environ.get('TRAVIS_BRANCH', sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip())
+    remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), sh.git.remote('-v').strip().splitlines())]
+    sh.cd(tmpdir)
     return {
         "head": {
-            "id": repo.head.commit.hexsha,
-            "author_name": repo.head.commit.author.name,
-            "author_email": repo.head.commit.author.email,
-            "committer_name": repo.head.commit.committer.name,
-            "committer_email": repo.head.commit.committer.email,
-            "message": repo.head.commit.message.strip()
+            "id": gitlog[0],
+            "author_name": gitlog[1],
+            "author_email": gitlog[2],
+            "committer_name": gitlog[3],
+            "committer_email": gitlog[4],
+            "message": gitlog[5].strip(),
         },
-        "branch": repo.head.commit.name_rev.split()[1],
-        "remotes": [{'name': remote.name, 'url': remote.url} for remote in repo.remotes]
+        "branch": branch,
+        "remotes": [{'name': remote[0], 'url': remote[1]} for remote in remotes]
     }

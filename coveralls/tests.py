@@ -20,10 +20,10 @@ GIT_EXP = {
     'head': {
         'committer_email': '24erre@gmail.com',
         'author_email': '24erre@gmail.com',
-        'author_name': u'z4r',
-        'message': u'coding utf8 example',
-        'committer_name': u'z4r',
-        'id': '6050a96a400cecba053e457e1e5187d3af0ede1e'
+        'author_name': u'Andrea de Marco',
+        'message': u'py3',
+        'committer_name': u'Andrea de Marco',
+        'id': 'c2c372b16ab98e00fddcb56d818ee5be435d37ec'
     },
     'remotes': [
         {
@@ -31,7 +31,7 @@ GIT_EXP = {
             'name': 'origin'
         }
     ],
-    'branch': 'master'
+    'branch': 'HEAD'
 }
 
 SOURCE_FILES = [
@@ -46,7 +46,7 @@ SOURCE_FILES = [
         'coverage': [None, 1, None, None, 1, 1]
     },
     {
-        'source': "def exsum(a, b):\n    # A comment of a exsum\n    return a + b\n\n\ndef exdiff(a, b):\n    return a - b\n\n\nif __name__ == '__main__':\n    print exsum(3,4)\n    print exdiff(2,2)",
+        'source': "def exsum(a, b):\n    # A comment of a exsum\n    return a + b\n\n\ndef exdiff(a, b):\n    return a - b\n\n\nif __name__ == '__main__':\n    print(exsum(3,4))\n    print(exdiff(2,2))",
         'name': 'example/exmath.py',
         'coverage': [1, None, 1, None, None, 1, 0, None, None, None, None, None]
     }
@@ -58,7 +58,7 @@ class CoverallsTestCase(TestCase):
     @httprettified
     def test_wear(self):
         HTTPretty.register_uri(
-            'POST',
+            HTTPretty.POST,
             'https://coveralls.io/api/v1/jobs',
             body='{"message":"Job #5.1 - 100.0% Covered","url":"https://coveralls.io/jobs/5722"}'
         )
@@ -77,7 +77,7 @@ class CoverallsTestCase(TestCase):
     @httprettified
     def test_api(self):
         HTTPretty.register_uri(
-            'POST',
+            HTTPretty.POST,
             'https://coveralls.io/api/v1/jobs',
             body='{"message":"Job #5.1 - 100.0% Covered","url":"https://coveralls.io/jobs/5722"}'
         )
