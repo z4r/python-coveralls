@@ -31,7 +31,7 @@ GIT_EXP = {
             'name': 'origin'
         }
     ],
-    'branch': 'HEAD'
+    'branch': 'master'
 }
 
 SOURCE_FILES = [
@@ -67,7 +67,9 @@ class CoverallsTestCase(TestCase):
 
     def test_gitrepo(self):
         git = repository.gitrepo(Arguments.base_dir)
-        self.assertEqual(git, GIT_EXP)
+        self.assertEqual(git['head'], GIT_EXP['head'])
+        self.assertEqual(git['remotes'], GIT_EXP['remotes'])
+        self.assertTrue(git['branch'] in (GIT_EXP['branch'], 'HEAD'))
 
     def test_coveralls(self):
         coverage = control.coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
