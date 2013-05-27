@@ -6,6 +6,10 @@ Python interface to coveralls.io API
     :target: http://travis-ci.org/z4r/python-coveralls
 .. image:: https://coveralls.io/repos/z4r/python-coveralls/badge.png?branch=master
     :target: https://coveralls.io/r/z4r/python-coveralls
+.. image:: https://pypip.in/v/python-coveralls/badge.png
+   :target: https://crate.io/packages/python-coveralls/
+.. image:: https://pypip.in/d/python-coveralls/badge.png
+   :target: https://crate.io/packages/python-coveralls/
 
 This package provides a module to interface with the https://coveralls.io API.
 
