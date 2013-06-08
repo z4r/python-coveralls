@@ -32,6 +32,10 @@ A ``.coveralls.yml`` file configured for Travis Pro::
     repo_token: abcdef1234569abdcef
     service_name: travis-pro
 
+if you don't want the ``repo_token`` under source control, set it in your ``coveralls`` command::
+
+    COVERALLS_REPO_TOKEN=abcdef1234569abdcef coveralls
+
 TRAVIS.YML
 ==========
 Create a ``.coverage`` file and you can use ``coverage``, ``py-cov``, or ``nose``.
@@ -58,3 +62,4 @@ It should look like something like::
       - py.test coveralls/tests.py --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
     after_success:
       - coveralls
+

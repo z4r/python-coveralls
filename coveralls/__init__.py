@@ -1,5 +1,5 @@
 __author__ = 'Andrea De Marco <24erre@gmail.com>'
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 __classifiers__ = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -62,7 +62,7 @@ def parse_args():
     except:
         pass
     yml = yml or {}
-    args.repo_token = yml.get('repo_token', '')
+    args.repo_token = yml.get('repo_token', os.environ.get('COVERALLS_REPO_TOKEN', ''))
     args.service_name = yml.get('service_name', 'travis-ci')
     args.service_job_id = os.environ.get('TRAVIS_JOB_ID', '')
     return args
