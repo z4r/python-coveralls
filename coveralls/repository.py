@@ -7,7 +7,7 @@ def gitrepo(root):
     tmpdir = sh.pwd().strip()
     sh.cd(root)
     gitlog = sh.git('--no-pager', 'log', '-1', pretty="format:%s" % FORMAT).split('\n', 5)
-    branch = os.environ.get('TRAVIS_BRANCH', sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip())
+    branch = os.environ.get('CIRCLE_BRANCH') or os.environ.get('TRAVIS_BRANCH', sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip())
     remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), sh.git.remote('-v').strip().splitlines())]
     sh.cd(tmpdir)
     return {
