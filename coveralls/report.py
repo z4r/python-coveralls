@@ -2,12 +2,17 @@ from coverage.report import Reporter
 
 
 class CoverallsReporter(Reporter):
-    def report(self, base_dir):
-        self.find_code_units(None)
+    def report(self, base_dir, ignore_errors=False):
         ret = []
         for cu in self.code_units:
-            with open(cu.filename) as fp:
-                source = fp.readlines()
+            try:
+                with open(cu.filename) as fp:
+                    source = fp.readlines()
+            except IOError:
+                if ignore_errors:
+                    continue
+                else:
+                    raise
             analysis = self.coverage._analyze(cu)
             coverage_list = [None for _ in source]
             for lineno, line in enumerate(source):

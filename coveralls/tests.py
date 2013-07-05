@@ -1,6 +1,10 @@
 # coding=utf-8
 import json
 from unittest import TestCase
+from coverage.codeunit import CodeUnit
+from coverage.files import FileLocator
+from coveralls.control import coveralls
+from coveralls.report import CoverallsReporter
 from httpretty import HTTPretty, httprettified
 from coveralls import api, repository, control, wear
 import os
@@ -14,6 +18,7 @@ class Arguments(object):
     base_dir = os.path.abspath('python-coveralls-example')
     data_file = os.path.join(base_dir, '.coverage')
     config_file = os.path.join(base_dir, '.coveragerc')
+    ignore_errors = False
 
 
 GIT_EXP = {
@@ -105,3 +110,18 @@ class CoverallsTestCase(TestCase):
             json.loads(json_file.read())['source_files'][1]['source'],
             u'# coding=utf-8\nEUR = "€"\n\n\ndef amount(tariff, currency=EUR):\n    return \'{0} {1:.2f}\'.format(currency, float(tariff))'
         )
+
+
+class NotAFileTestCase(TestCase):
+    def setUp(self):
+        coverage = coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
+        coverage.load()
+        self.reporter = CoverallsReporter(coverage, coverage.config)
+        self.reporter.find_code_units(None)
+        self.reporter.code_units.append(CodeUnit('NotAFile.py', FileLocator()))
+
+    def test_report_raises(self):
+        self.assertRaises(IOError, self.reporter.report, Arguments.base_dir)
+
+    def test_report_continue(self):
+        self.assertEqual(self.reporter.report(Arguments.base_dir, ignore_errors=True), SOURCE_FILES)

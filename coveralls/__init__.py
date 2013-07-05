@@ -1,5 +1,5 @@
 __author__ = 'Andrea De Marco <24erre@gmail.com>'
-__version__ = '2.2.0'
+__version__ = '2.3.0'
 __classifiers__ = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -50,6 +50,7 @@ def parse_args():
     parser.add_argument('--data_file', '-d', help='coverage file name', default='.coverage')
     parser.add_argument('--config_file', '-c', help='coverage config file name', default='.coveragerc')
     parser.add_argument('--coveralls_yaml', '-y', help='coveralls yaml file name', default='.coveralls.yml')
+    parser.add_argument('--ignore-errors', '-i', help='gnore errors while reading source files', action='store_true', default=False)
     args = parser.parse_args()
     args.base_dir = os.path.abspath(args.base_dir)
     args.data_file = os.path.join(args.base_dir, args.data_file)
@@ -81,7 +82,7 @@ def wear(args=None):
         service_job_id=args.service_job_id,
         service_name=args.service_name,
         git=gitrepo(args.base_dir),
-        source_files=coverage.coveralls(args.base_dir),
+        source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors),
     )
     print(response.text)
     return response

@@ -63,3 +63,27 @@ It should look like something like::
     after_success:
       - coveralls
 
+COVERALLS OPTIONS
+=================
+You probably don't need to configure anything, but if you customize some option of `coverage` you would add it to `coveralls` too::
+
+    $ coveralls -h
+    usage: coveralls [-h] [--coveralls_url COVERALLS_URL] [--base_dir BASE_DIR]
+                     [--data_file DATA_FILE] [--config_file CONFIG_FILE]
+                     [--coveralls_yaml COVERALLS_YAML] [--ignore-errors]
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      --coveralls_url COVERALLS_URL, -u COVERALLS_URL
+                            coveralls.io api url
+      --base_dir BASE_DIR, -b BASE_DIR
+                            project root directory
+      --data_file DATA_FILE, -d DATA_FILE
+                            coverage file name
+      --config_file CONFIG_FILE, -c CONFIG_FILE
+                            coverage config file name
+      --coveralls_yaml COVERALLS_YAML, -y COVERALLS_YAML
+                            coveralls yaml file name
+      --ignore-errors, -i   gnore errors while reading source files
+
+
