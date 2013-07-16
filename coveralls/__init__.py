@@ -1,5 +1,5 @@
 __author__ = 'Andrea De Marco <24erre@gmail.com>'
-__version__ = '2.3.0'
+__version__ = '2.4.0'
 __classifiers__ = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -73,6 +73,9 @@ def wear(args=None):
     from coveralls.control import coveralls
     from coveralls.repository import gitrepo
     from coveralls.api import post
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('coveralls')
     args = args or parse_args()
     coverage = coveralls(data_file=args.data_file, config_file=args.config_file)
     coverage.load()
@@ -84,5 +87,6 @@ def wear(args=None):
         git=gitrepo(args.base_dir),
         source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors),
     )
-    print(response.text)
-    return response
+    logger.info(response.status_code)
+    logger.info(response.text)
+    return 1 if 'error' in response.json() else 0

@@ -61,14 +61,25 @@ SOURCE_FILES = [
 
 class CoverallsTestCase(TestCase):
     @httprettified
-    def test_wear(self):
+    def test_wear_ok(self):
         HTTPretty.register_uri(
             HTTPretty.POST,
             'https://coveralls.io/api/v1/jobs',
-            body='{"message":"Job #5.1 - 100.0% Covered","url":"https://coveralls.io/jobs/5722"}'
+            body='{"message":"Job #5.1","url":"https://coveralls.io/jobs/5722"}'
         )
-        response = wear(Arguments)
-        self.assertEqual(response.json(), {u'url': u'https://coveralls.io/jobs/5722', u'message': u'Job #5.1 - 100.0% Covered'})
+        sysexit = wear(Arguments)
+        self.assertEqual(sysexit, 0)
+
+    @httprettified
+    def test_wear_ok(self):
+        HTTPretty.register_uri(
+            HTTPretty.POST,
+            'https://coveralls.io/api/v1/jobs',
+            body='{"message":"Build processing error.","error":true,"url":""}',
+            status=500,
+        )
+        sysexit = wear(Arguments)
+        self.assertEqual(sysexit, 1)
 
     def test_gitrepo(self):
         git = repository.gitrepo(Arguments.base_dir)
