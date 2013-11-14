@@ -1,4 +1,5 @@
 pytest
 pytest-pep8
 pytest-cov
-git+https://github.com/gabrielfalcao/HTTPretty.git
+httpretty
+
