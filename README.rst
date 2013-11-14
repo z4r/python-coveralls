@@ -27,7 +27,9 @@ CONFIGURATION
 If you're not using Travis, Coveralls for Python uses a ``.coveralls.yml`` file at the root level of your repository to configure options.
 The only required option is ``repo_token`` (found on your repository's page on Coveralls) to specify which project on Coveralls your project maps to.
 Another important option is is ``service_name`` which allows you to specify where Coveralls should look to find additional information about your builds. This can be any string, but using travis-ci or travis-pro will allow Coveralls to fetch branch data, comment on pull requests, and more.
-A ``.coveralls.yml`` file configured for Travis Pro::
+A ``.coveralls.yml`` file configured for Travis Pro:
+
+.. code-block:: yaml
 
     repo_token: abcdef1234569abdcef
     service_name: travis-pro
@@ -43,7 +45,9 @@ Then you can add in the _after_success_ step::
 
     coveralls
 
-It should look like something like::
+It should look like something like:
+
+.. code-block:: yaml
 
     language: python
     python:
