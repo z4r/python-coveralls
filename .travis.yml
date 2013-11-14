@@ -6,7 +6,7 @@ python:
 install:
   - pip install -e . --use-mirrors
 before_script:
-  - pip install -r test_requirements.txt --use-mirrors
+  - pip install -U -r test_requirements.txt --use-mirrors
   - git clone https://github.com/z4r/python-coveralls-example.git
   - cd python-coveralls-example
   - git checkout -qf c2c372b16ab98e00fddcb56d818ee5be435d37ec
