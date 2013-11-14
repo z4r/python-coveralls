@@ -40,7 +40,7 @@ if you don't want the ``repo_token`` under source control, set it in your ``cove
 
 TRAVIS.YML
 ==========
-Create a ``.coverage`` file and you can use ``coverage``, ``py-cov``, or ``nose``.
+Create a ``.coverage`` file and you can use ``coverage``, ``pytest-cov``, or ``nose``.
 Then you can add in the _after_success_ step::
 
     coveralls
