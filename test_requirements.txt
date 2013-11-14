@@ -1,5 +1,5 @@
 pytest
 pytest-pep8
 pytest-cov
-httpretty
-
+#httpretty
+git+https://github.com/melor/HTTPretty.git@py33
