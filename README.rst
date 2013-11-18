@@ -93,3 +93,9 @@ You probably don't need to configure anything, but if you customize some option 
       --ignore-errors, -i   gnore errors while reading source files
 
 
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/z4r/python-coveralls/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
