@@ -19,10 +19,9 @@ readme = open(os.path.join(wd, 'README.rst'), 'r').readlines()
 description = readme[1]
 long_description = ''.join(readme)
 
-try:
-    reqs = open(os.path.join(os.path.dirname(__file__), 'requirements.txt')).read()
-except (IOError, OSError):
-    reqs = ''
+reqs = open(os.path.join(os.path.dirname(__file__), 'requirements.txt')).readlines()
+if sys.version_info < (2, 7):
+    reqs.append('argparse')
 
 setup(
     name=name,
