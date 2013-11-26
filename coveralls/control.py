@@ -6,4 +6,4 @@ class coveralls(coverage):
     def coveralls(self, base_dir, ignore_errors=False):
         reporter = CoverallsReporter(self, self.config)
         reporter.find_code_units(None)
-        return reporter.report(base_dir, ignore_errors=False)
+        return reporter.report(base_dir, ignore_errors=ignore_errors)
