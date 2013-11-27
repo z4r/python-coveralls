@@ -3,6 +3,7 @@ import json
 from unittest import TestCase
 from coverage.codeunit import CodeUnit
 from coverage.files import FileLocator
+from coverage.misc import NotPython
 from coveralls.control import coveralls
 from coveralls.report import CoverallsReporter
 from httpretty import HTTPretty, httprettified
@@ -133,6 +134,21 @@ class NotAFileTestCase(TestCase):
 
     def test_report_raises(self):
         self.assertRaises(IOError, self.reporter.report, Arguments.base_dir)
+
+    def test_report_continue(self):
+        self.assertEqual(self.reporter.report(Arguments.base_dir, ignore_errors=True), SOURCE_FILES)
+
+
+class NotAPythonTestCase(TestCase):
+    def setUp(self):
+        coverage = coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
+        coverage.load()
+        self.reporter = CoverallsReporter(coverage, coverage.config)
+        self.reporter.find_code_units(None)
+        self.reporter.code_units.append(CodeUnit('LICENSE', FileLocator()))
+
+    def test_report_raises(self):
+        self.assertRaises(NotPython, self.reporter.report, Arguments.base_dir)
 
     def test_report_continue(self):
         self.assertEqual(self.reporter.report(Arguments.base_dir, ignore_errors=True), SOURCE_FILES)
