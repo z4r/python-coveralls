@@ -1,4 +1,5 @@
 from coverage.report import Reporter
+from coverage.misc import NotPython
 
 
 class CoverallsReporter(Reporter):
@@ -13,7 +14,13 @@ class CoverallsReporter(Reporter):
                     continue
                 else:
                     raise
-            analysis = self.coverage._analyze(cu)
+            try:
+                analysis = self.coverage._analyze(cu)
+            except NotPython:
+                if ignore_errors:
+                    continue
+                else:
+                    raise
             coverage_list = [None for _ in source]
             for lineno, line in enumerate(source):
                 if lineno + 1 in analysis.statements:
