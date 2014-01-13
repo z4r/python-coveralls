@@ -7,9 +7,12 @@ Python interface to coveralls.io API
 .. image:: https://coveralls.io/repos/z4r/python-coveralls/badge.png?branch=master
     :target: https://coveralls.io/r/z4r/python-coveralls
 .. image:: https://pypip.in/v/python-coveralls/badge.png
-   :target: https://crate.io/packages/python-coveralls/
+    :target: https://pypi.python.org/pypi/python-coveralls/
 .. image:: https://pypip.in/d/python-coveralls/badge.png
-   :target: https://crate.io/packages/python-coveralls/
+    :target: https://pypi.python.org/pypi/python-coveralls/
+.. image:: https://pypip.in/wheel/python-coveralls/badge.png
+    :target: https://pypi.python.org/pypi/python-coveralls/
+    :alt: Wheel Status
 
 This package provides a module to interface with the https://coveralls.io API.
 
