@@ -1,5 +1,5 @@
 __author__ = 'Andrea De Marco <24erre@gmail.com>'
-__version__ = '2.4.3'
+__version__ = '2.4.4'
 __classifiers__ = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
@@ -51,11 +51,13 @@ def parse_args():
     parser.add_argument('--config_file', '-c', help='coverage config file name', default='.coveragerc')
     parser.add_argument('--coveralls_yaml', '-y', help='coveralls yaml file name', default='.coveralls.yml')
     parser.add_argument('--ignore-errors', '-i', help='gnore errors while reading source files', action='store_true', default=False)
+    parser.add_argument('--merge_file', '-m', help='json file containing coverage data to be merged (for merging javascript coverage)', default=None)
     args = parser.parse_args()
     args.base_dir = os.path.abspath(args.base_dir)
     args.data_file = os.path.join(args.base_dir, args.data_file)
     args.config_file = os.path.join(args.base_dir, args.config_file)
     args.coveralls_yaml = os.path.join(args.base_dir, args.coveralls_yaml)
+    args.merge_file = os.path.join(args.base_dir, args.merge_file) if args.merge_file else None
     yml = {}
     try:
         with open(args.coveralls_yaml, 'r') as fp:
@@ -85,7 +87,7 @@ def wear(args=None):
         service_job_id=args.service_job_id,
         service_name=args.service_name,
         git=gitrepo(args.base_dir),
-        source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors),
+        source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors, merge_file=args.merge_file),
     )
     logger.info(response.status_code)
     logger.info(response.text)

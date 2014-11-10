@@ -20,6 +20,7 @@ class Arguments(object):
     data_file = os.path.join(base_dir, '.coverage')
     config_file = os.path.join(base_dir, '.coveragerc')
     ignore_errors = False
+    merge_file = os.path.join(base_dir, 'merge.json')
 
 
 GIT_EXP = {
@@ -33,7 +34,7 @@ GIT_EXP = {
     },
     'remotes': [
         {
-            'url': 'https://github.com/z4r/python-coveralls-example.git',
+            'url': 'git@github.com:insurancezebra/python-coveralls-example.git',
             'name': 'origin'
         }
     ],
@@ -57,6 +58,14 @@ SOURCE_FILES = [
         'coverage': [1, None, 1, None, None, 1, 0, None, None, None, None, None]
     }
 
+]
+
+MERGE_SOURCE_FILES = [
+    {
+        'source': "var foo = 'bar';",
+        'name': "example/exjs.js",
+        'coverage': [1]
+    }
 ]
 
 
@@ -92,6 +101,11 @@ class CoverallsTestCase(TestCase):
         coverage = control.coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
         coverage.load()
         self.assertEqual(coverage.coveralls(Arguments.base_dir), SOURCE_FILES)
+
+    def test_coveralls_with_merge(self):
+        coverage = control.coveralls(data_file=Arguments.data_file, config_file=Arguments.config_file)
+        coverage.load()
+        self.assertEqual(coverage.coveralls(Arguments.base_dir, merge_file=Arguments.merge_file), SOURCE_FILES + MERGE_SOURCE_FILES)
 
     @httprettified
     def test_api(self):

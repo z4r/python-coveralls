@@ -1,9 +1,11 @@
+import json
+
 from coverage.report import Reporter
 from coverage.misc import NotPython
 
 
 class CoverallsReporter(Reporter):
-    def report(self, base_dir, ignore_errors=False):
+    def report(self, base_dir, ignore_errors=False, merge_file=None):
         ret = []
         for cu in self.code_units:
             try:
@@ -30,4 +32,13 @@ class CoverallsReporter(Reporter):
                 'source': ''.join(source).rstrip(),
                 'coverage': coverage_list,
             })
+
+        # if there's a merge file, load that and append it to the results as well
+        if merge_file:
+            with open(merge_file, 'r') as mfp:
+                data = json.loads(mfp.read())
+                source_files = data.get('source_files')
+                if source_files:
+                    ret.extend(source_files)
+
         return ret
