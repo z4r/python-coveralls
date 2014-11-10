@@ -25,16 +25,16 @@ class Arguments(object):
 
 GIT_EXP = {
     'head': {
-        'committer_email': '24erre@gmail.com',
-        'author_email': '24erre@gmail.com',
+        'committer_email': u'24erre@gmail.com',
+        'author_email': u'24erre@gmail.com',
         'author_name': u'Andrea de Marco',
-        'message': u'py3',
+        'message': u'Merge pull request #1 from insurancezebra/master',
         'committer_name': u'Andrea de Marco',
-        'id': 'c2c372b16ab98e00fddcb56d818ee5be435d37ec'
+        'id': u'3e82fd5159b84bebe9bc6c9fd3959f322e6f7098'
     },
     'remotes': [
         {
-            'url': 'git@github.com:insurancezebra/python-coveralls-example.git',
+            'url': 'https://github.com/z4r/python-coveralls-example.git',
             'name': 'origin'
         }
     ],
@@ -91,10 +91,16 @@ class CoverallsTestCase(TestCase):
         sysexit = wear(Arguments)
         self.assertEqual(sysexit, 1)
 
-    def test_gitrepo(self):
+    def test_gitrepo_head(self):
         git = repository.gitrepo(Arguments.base_dir)
         self.assertEqual(git['head'], GIT_EXP['head'])
+
+    def test_gitrepo_remotes(self):
+        git = repository.gitrepo(Arguments.base_dir)
         self.assertEqual(git['remotes'], GIT_EXP['remotes'])
+
+    def test_gitrepo_branch(self):
+        git = repository.gitrepo(Arguments.base_dir)
         self.assertTrue(git['branch'] in (GIT_EXP['branch'], 'HEAD'))
 
     def test_coveralls(self):
