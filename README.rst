@@ -36,6 +36,7 @@ A ``.coveralls.yml`` file configured for Travis Pro:
 
     repo_token: abcdef1234569abdcef
     service_name: travis-pro
+    parallel: true # if the CI is running your build in parallel
 
 if you don't want the ``repo_token`` under source control, set it in your ``coveralls`` command::
 
@@ -44,7 +45,7 @@ if you don't want the ``repo_token`` under source control, set it in your ``cove
 TRAVIS.YML
 ==========
 Create a ``.coverage`` file and you can use `coverage <https://pypi.python.org/pypi/coverage>`_,
-`pytest-cov <https://pypi.python.org/pypi/pytest-cov>`_, or 
+`pytest-cov <https://pypi.python.org/pypi/pytest-cov>`_, or
 `nosexcover <https://pypi.python.org/pypi/nosexcover>`_.
 Then you can add in the **after_success** step::
 
@@ -101,4 +102,3 @@ You probably don't need to configure anything, but if you customize some option 
 .. image:: https://d2weczhvl823v0.cloudfront.net/z4r/python-coveralls/trend.png
    :alt: Bitdeli badge
    :target: https://bitdeli.com/free
-

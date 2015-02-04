@@ -21,6 +21,7 @@ class Arguments(object):
     config_file = os.path.join(base_dir, '.coveragerc')
     ignore_errors = False
     merge_file = os.path.join(base_dir, 'merge.json')
+    parallel = True
 
 
 GIT_EXP = {
@@ -126,7 +127,8 @@ class CoverallsTestCase(TestCase):
             service_job_id=Arguments.service_job_id,
             service_name=Arguments.service_name,
             git=GIT_EXP,
-            source_files=SOURCE_FILES
+            source_files=SOURCE_FILES,
+            parallel=Arguments.parallel
         )
         self.assertEqual(response.json(), {u'url': u'https://coveralls.io/jobs/5722', u'message': u'Job #5.1 - 100.0% Covered'})
 
@@ -136,7 +138,8 @@ class CoverallsTestCase(TestCase):
             service_job_id=Arguments.service_job_id,
             service_name=Arguments.service_name,
             git=GIT_EXP,
-            source_files=SOURCE_FILES
+            source_files=SOURCE_FILES,
+            parallel=Arguments.parallel
         )
         self.assertEqual(
             json.loads(json_file.read())['source_files'][1]['source'],
