@@ -68,6 +68,7 @@ def parse_args():
     args.repo_token = yml.get('repo_token', os.environ.get('COVERALLS_REPO_TOKEN', ''))
     args.service_name = yml.get('service_name', 'travis-ci')
     args.service_job_id = os.environ.get('TRAVIS_JOB_ID', '')
+    args.parallel = yml.get('parallel', os.environ.get('COVERALLS_PARALLEL', False))
     return args
 
 
@@ -88,6 +89,7 @@ def wear(args=None):
         service_name=args.service_name,
         git=gitrepo(args.base_dir),
         source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors, merge_file=args.merge_file),
+        parallel=args.parallel,
     )
     logger.info(response.status_code)
     logger.info(response.text)
