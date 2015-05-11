@@ -22,6 +22,7 @@ class Arguments(object):
     ignore_errors = False
     merge_file = os.path.join(base_dir, 'merge.json')
     parallel = True
+    nogit = False
 
 
 GIT_EXP = {
