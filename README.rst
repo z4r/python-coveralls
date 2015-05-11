@@ -95,6 +95,7 @@ You probably don't need to configure anything, but if you customize some option 
       --coveralls_yaml COVERALLS_YAML, -y COVERALLS_YAML
                             coveralls yaml file name
       --ignore-errors, -i   gnore errors while reading source files
+      --nogit               do not gather git repo info
 
 
 
