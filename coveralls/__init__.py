@@ -50,7 +50,7 @@ def parse_args():
     parser.add_argument('--data_file', '-d', help='coverage file name', default='.coverage')
     parser.add_argument('--config_file', '-c', help='coverage config file name', default='.coveragerc')
     parser.add_argument('--coveralls_yaml', '-y', help='coveralls yaml file name', default='.coveralls.yml')
-    parser.add_argument('--ignore-errors', '-i', help='gnore errors while reading source files', action='store_true', default=False)
+    parser.add_argument('--ignore-errors', '-i', help='ignore errors while reading source files', action='store_true', default=False)
     parser.add_argument('--merge_file', '-m', help='json file containing coverage data to be merged (for merging javascript coverage)', default=None)
     parser.add_argument('--nogit', help='do not gather git repo info', action='store_true', default=False)
     args = parser.parse_args()
