@@ -6,7 +6,6 @@ python:
   - "3.4"
   - "3.5"
   - "3.5-dev"
-  - "nightly"
 install:
   - pip install -U pip
   - python setup.py develop
