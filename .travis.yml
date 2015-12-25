@@ -11,7 +11,7 @@ install:
   - pip install -U pip
   - python setup.py develop
 before_script:
-  - pip install -r test_requirements.txt --use-mirrors
+  - pip install -r test_requirements.txt
   - git clone https://github.com/z4r/python-coveralls-example.git
   - cd python-coveralls-example
   - git checkout -qf 3e82fd5159b84bebe9bc6c9fd3959f322e6f7098
