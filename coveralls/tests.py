@@ -103,6 +103,9 @@ class CoverallsTestCase(TestCase):
 
     def test_gitrepo_branch(self):
         git = repository.gitrepo(Arguments.base_dir)
+        print(git)
+        print(GIT_EXP)
+        raise
         self.assertTrue(git['branch'] in (GIT_EXP['branch'], 'HEAD'))
 
     def test_coveralls(self):
