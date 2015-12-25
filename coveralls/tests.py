@@ -2,6 +2,7 @@
 import json
 from unittest import TestCase
 from coverage.plugin import FileReporter
+from coverage.python import PythonFileReporter
 from coverage.misc import NotPython
 from coveralls.control import coveralls
 from coveralls.report import CoverallsReporter
@@ -168,7 +169,7 @@ class NotAPythonTestCase(TestCase):
         coverage.load()
         self.reporter = CoverallsReporter(coverage, coverage.config)
         self.reporter.find_file_reporters(None)
-        self.reporter.file_reporters.append(FileReporter('LICENSE'))
+        self.reporter.file_reporters.append(PythonFileReporter('LICENSE', coverage=coverage))
 
     def test_report_raises(self):
         self.assertRaises(NotPython, self.reporter.report, Arguments.base_dir)
