@@ -8,7 +8,8 @@ python:
   - "3.5-dev"
   - "nightly"
 install:
-  - pip install -e . --use-mirrors
+  - pip install -U pip
+  - python setup.py develop
 before_script:
   - pip install -U -r test_requirements.txt --use-mirrors
   - git clone https://github.com/z4r/python-coveralls-example.git
