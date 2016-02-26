@@ -49,16 +49,16 @@ def parse_args():
     parser = argparse.ArgumentParser(prog='coveralls')
     parser.add_argument('--coveralls_url', '-u', help='coveralls.io api url', default='https://coveralls.io/api/v1/jobs')
     parser.add_argument('--base_dir', '-b', help='project root directory', default='.')
-    parser.add_argument('--data_file', '-d', help='coverage file name', default='.coverage')
-    parser.add_argument('--config_file', '-c', help='coverage config file name', default='.coveragerc')
+    parser.add_argument('--data_file', '-d', help='coverage file name', default=None)
+    parser.add_argument('--config_file', '-c', help='coverage config file name', default=None)
     parser.add_argument('--coveralls_yaml', '-y', help='coveralls yaml file name', default='.coveralls.yml')
     parser.add_argument('--ignore-errors', '-i', help='ignore errors while reading source files', action='store_true', default=False)
     parser.add_argument('--merge_file', '-m', help='json file containing coverage data to be merged (for merging javascript coverage)', default=None)
     parser.add_argument('--nogit', help='do not gather git repo info', action='store_true', default=False)
     args = parser.parse_args()
     args.base_dir = os.path.abspath(args.base_dir)
-    args.data_file = os.path.join(args.base_dir, args.data_file)
-    args.config_file = os.path.join(args.base_dir, args.config_file)
+    args.data_file = os.path.join(args.base_dir, args.data_file) if args.data_file else None
+    args.config_file = os.path.join(args.base_dir, args.config_file) if args.config_file else True
     args.coveralls_yaml = os.path.join(args.base_dir, args.coveralls_yaml)
     args.merge_file = os.path.join(args.base_dir, args.merge_file) if args.merge_file else None
     yml = {}
