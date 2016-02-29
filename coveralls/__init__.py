@@ -77,7 +77,7 @@ def parse_args():
 
 def wear(args=None):
     from coveralls.control import coveralls
-    from coveralls.repository import gitrepo
+    from coveralls.repository import repo
     from coveralls.api import post
     import logging
     logging.basicConfig(level=logging.INFO)
@@ -90,7 +90,7 @@ def wear(args=None):
         repo_token=args.repo_token,
         service_job_id=args.service_job_id,
         service_name=args.service_name,
-        git=gitrepo(args.base_dir) if not args.nogit else {},
+        git=repo(args.base_dir) if not args.nogit else {},
         source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors, merge_file=args.merge_file),
         parallel=args.parallel,
     )
