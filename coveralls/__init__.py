@@ -68,8 +68,8 @@ def parse_args():
     except:
         pass
     yml = yml or {}
-    args.repo_token = yml.get('repo_token', os.environ.get('COVERALLS_REPO_TOKEN', ''))
-    args.service_name = yml.get('service_name', 'travis-ci')
+    args.repo_token = yml.get('repo_token') or os.environ.get('COVERALLS_REPO_TOKEN') or ''
+    args.service_name = yml.get('service_name') or os.environ.get('COVERALLS_SERVICE_NAME') or 'travis-ci'
     args.service_job_id = os.environ.get('TRAVIS_JOB_ID', '')
     args.parallel = yml.get('parallel', os.environ.get('COVERALLS_PARALLEL', False))
     return args
