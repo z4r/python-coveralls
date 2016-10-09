@@ -19,9 +19,16 @@ readme = open(os.path.join(wd, 'README.rst'), 'r').readlines()
 description = readme[1]
 long_description = ''.join(readme)
 
-reqs = open(os.path.join(os.path.dirname(__file__), 'requirements.txt')).readlines()
+reqs = [
+        'PyYAML',
+        'requests',
+        'coverage==4.0.3',
+        'six',
+        ]
+
 if sys.version_info < (2, 7):
     reqs.append('argparse')
+    reqs.append('subprocess32')
 
 setup(
     name=name,

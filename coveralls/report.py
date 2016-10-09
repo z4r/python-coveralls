@@ -1,3 +1,6 @@
+
+import os
+
 import json
 
 from coverage.report import Reporter
@@ -28,7 +31,7 @@ class CoverallsReporter(Reporter):
                 if lineno + 1 in analysis.statements:
                     coverage_list[lineno] = int(lineno + 1 not in analysis.missing)
             ret.append({
-                'name': fr.filename.replace(base_dir, '').lstrip('/'),
+                'name': fr.filename.replace(base_dir, '').lstrip(os.sep).replace(os.sep, '/'),
                 'source': ''.join(source).rstrip(),
                 'coverage': coverage_list,
             })

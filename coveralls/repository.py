@@ -1,15 +1,23 @@
+
+import sys
 import os
-import sh
+
+try:
+    from subprocess32 import check_output
+except ImportError:
+    from subprocess import check_output
+
 FORMAT = '%n'.join(['%H', '%aN', '%ae', '%cN', '%ce', '%s'])
 
 
 def gitrepo(root):
-    tmpdir = sh.pwd().strip()
-    sh.cd(root)
-    gitlog = sh.git('--no-pager', 'log', '-1', pretty="format:%s" % FORMAT).split('\n', 5)
-    branch = os.environ.get('CIRCLE_BRANCH') or os.environ.get('TRAVIS_BRANCH', sh.git('rev-parse', '--abbrev-ref', 'HEAD').strip())
-    remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), sh.git.remote('-v').strip().splitlines())]
-    sh.cd(tmpdir)
+    tmpdir = os.getcwd()
+    os.chdir(root)
+    gitlog = check_output(['git', '--no-pager', 'log', '-1', '--pretty=format:%s' % FORMAT], universal_newlines=True).split('\n', 5)
+    branch = (os.environ.get('CIRCLE_BRANCH') or
+              os.environ.get('TRAVIS_BRANCH', check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip()))
+    remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), check_output(['git', 'remote', '-v']).decode().strip().splitlines())]
+    os.chdir(tmpdir)
     return {
         "head": {
             "id": gitlog[0],
