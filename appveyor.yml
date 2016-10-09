@@ -1,0 +1,33 @@
+environment:
+  matrix:
+  - PYTHON: C:\Python27\python.exe
+    platform: Any CPU
+  - PYTHON: C:\Python33\python.exe
+    platform: Any CPU
+  - PYTHON: C:\Python34\python.exe
+    platform: Any CPU
+  - PYTHON: C:\Python35\python.exe
+    platform: Any CPU
+
+before_build:
+  - "%PYTHON% -m pip install virtualenv"
+  - "%PYTHON% -m virtualenv venv"
+  - venv\Scripts\activate.bat
+
+build_script:
+  - pip install -U pip
+  - python setup.py develop
+
+before_test:
+  - pip install -r test_requirements.txt
+  - 'git clone https://github.com/z4r/python-coveralls-example.git'
+  - cd python-coveralls-example
+  - git checkout -qf 3e82fd5159b84bebe9bc6c9fd3959f322e6f7098
+  - py.test example/tests.py --cov=example
+  - cd %APPVEYOR_BUILD_FOLDER%
+
+test_script:
+  - py.test coveralls/tests.py --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
+
+#on_success:
+#  - coveralls
