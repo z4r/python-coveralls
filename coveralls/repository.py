@@ -15,8 +15,8 @@ def gitrepo(root):
     os.chdir(root)
     gitlog = check_output(['git', '--no-pager', 'log', '-1', '--pretty=format:%s' % FORMAT], universal_newlines=True).split('\n', 5)
     branch = (os.environ.get('CIRCLE_BRANCH') or
-              os.environ.get('TRAVIS_BRANCH', check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).strip()))
-    remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), check_output(['git', 'remote', '-v']).decode().strip().splitlines())]
+              os.environ.get('TRAVIS_BRANCH', check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], universal_newlines=True).strip()))
+    remotes = [x.split() for x in filter(lambda x: x.endswith('(fetch)'), check_output(['git', 'remote', '-v'], universal_newlines=True).strip().splitlines())]
     os.chdir(tmpdir)
     return {
         "head": {
@@ -41,10 +41,15 @@ HGLOG = """{node}
 
 
 def hgrepo(root):
-    hglog = sh.hg('log', '-l', '1', template=HGLOG).split('\n', 5)
+    hglog = check_output(['hg', 'log', '-l', '1', 'template=%s' % HGLOG],
+                         universal_newlines=True).split('\n', 5)
     branch = (os.environ.get('CIRCLE_BRANCH') or
-              os.environ.get('TRAVIS_BRANCH', sh.hg('branch').strip()))
-    remotes = [x.split(' = ') for x in sh.hg('paths')]
+              os.environ.get('TRAVIS_BRANCH',
+                             check_output(['hg', 'branch'],
+                                          universal_newlines=True).strip()))
+    remotes = [x.split(' = ') for x in
+               check_output(['hg', 'paths'],
+                            universal_newlines=True).strip().splitlines()]
     return {
         'head': {
             'id': hglog[0],
