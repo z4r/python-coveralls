@@ -23,6 +23,7 @@ class Arguments(object):
     merge_file = os.path.join(base_dir, 'merge.json')
     parallel = True
     nogit = False
+    skip_ssl_verify = False
 
 
 GIT_EXP = {

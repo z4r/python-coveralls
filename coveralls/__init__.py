@@ -55,6 +55,7 @@ def parse_args():
     parser.add_argument('--ignore-errors', '-i', help='ignore errors while reading source files', action='store_true', default=False)
     parser.add_argument('--merge_file', '-m', help='json file containing coverage data to be merged (for merging javascript coverage)', default=None)
     parser.add_argument('--nogit', help='do not gather git repo info', action='store_true', default=False)
+    parser.add_argument('--skip_ssl_verify', help='skip ssl certificate verification when communicating with the coveralls server', action='store_true', default=False)
     args = parser.parse_args()
     args.base_dir = os.path.abspath(args.base_dir)
     args.data_file = os.path.join(args.base_dir, args.data_file) if args.data_file else None
@@ -93,6 +94,7 @@ def wear(args=None):
         git=repo(args.base_dir) if not args.nogit else {},
         source_files=coverage.coveralls(args.base_dir, ignore_errors=args.ignore_errors, merge_file=args.merge_file),
         parallel=args.parallel,
+        skip_ssl_verify=args.skip_ssl_verify,
     )
     logger.info(response.status_code)
     logger.info(response.text)
