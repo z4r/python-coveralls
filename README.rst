@@ -81,6 +81,7 @@ You probably don't need to configure anything, but if you customize some option 
     usage: coveralls [-h] [--coveralls_url COVERALLS_URL] [--base_dir BASE_DIR]
                      [--data_file DATA_FILE] [--config_file CONFIG_FILE]
                      [--coveralls_yaml COVERALLS_YAML] [--ignore-errors]
+                     [--merge_file MERGE_FILE] [--nogit]
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -94,7 +95,10 @@ You probably don't need to configure anything, but if you customize some option 
                             coverage config file name
       --coveralls_yaml COVERALLS_YAML, -y COVERALLS_YAML
                             coveralls yaml file name
-      --ignore-errors, -i   gnore errors while reading source files
+      --ignore-errors, -i   ignore errors while reading source files
+      --merge_file MERGE_FILE, -m MERGE_FILE
+                            json file containing coverage data to be merged (for
+                            merging javascript coverage)
       --nogit               do not gather git repo info
 
 
