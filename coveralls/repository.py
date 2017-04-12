@@ -41,7 +41,7 @@ HGLOG = """{node}
 
 
 def hgrepo(root):
-    hglog = check_output(['hg', 'log', '-l', '1', 'template=%s' % HGLOG],
+    hglog = check_output(['hg', 'log', '-l', '1', '--template=%s' % HGLOG],
                          universal_newlines=True).split('\n', 5)
     branch = (os.environ.get('CIRCLE_BRANCH') or
               os.environ.get('TRAVIS_BRANCH',
