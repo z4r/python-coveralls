@@ -6,11 +6,11 @@ Python interface to coveralls.io API
     :target: http://travis-ci.org/z4r/python-coveralls
 .. image:: https://coveralls.io/repos/z4r/python-coveralls/badge.png?branch=master
     :target: https://coveralls.io/r/z4r/python-coveralls
-.. image:: https://pypip.in/v/python-coveralls/badge.png
+.. image:: https://img.shields.io/pypi/v/python-coveralls.svg
     :target: https://pypi.python.org/pypi/python-coveralls/
-.. image:: https://pypip.in/d/python-coveralls/badge.png
+.. image:: https://img.shields.io/pypi/dm/python-coveralls.svg
     :target: https://pypi.python.org/pypi/python-coveralls/
-.. image:: https://pypip.in/wheel/python-coveralls/badge.png
+.. image:: https://img.shields.io/pypi/wheel/python-coveralls.svg
     :target: https://pypi.python.org/pypi/python-coveralls/
     :alt: Wheel Status
 
