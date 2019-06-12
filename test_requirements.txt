@@ -1,4 +1,4 @@
 pytest
 pytest-pep8
 pytest-cov==2.6.0
-git+https://github.com/melor/HTTPretty.git@py33
+httpretty
