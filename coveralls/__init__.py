@@ -63,7 +63,7 @@ def parse_args():
     yml = {}
     try:
         with open(args.coveralls_yaml, 'r') as fp:
-            yml = yaml.load(fp)
+            yml = yaml.load(fp, Loader=yaml.SafeLoader)
     except:
         pass
     yml = yml or {}
